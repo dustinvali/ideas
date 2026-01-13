@@ -3,25 +3,17 @@ import './App.css'
 import Form from "./Form"
 import Header from "./Header"
 import IdeaArea from './IdeaArea'
-
-export interface Idea {
-    id: number;
-    ideaText: string
-    date: Date;
-}
-
-const listIdeas: Idea[] = [
-]
+import type { Idea } from "./models/types" 
 
 function App() {
-  const [ideas, setIdeas] = useState(listIdeas);
+  const [ideas, setIdeas] = useState<Idea[]>([]);
   
   return (
     <div className="flex justify-center w-dvw h-dvh">
       <div className='w-[67ch] items-center flex flex-col'>
         <Header />
         <Form ideas={ideas} setIdeas={setIdeas} />
-        <IdeaArea ideas={ideas} />
+        <IdeaArea ideas={ideas} setIdeas={setIdeas}/>
       </div>
     </div>
   )
