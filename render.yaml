@@ -8,9 +8,11 @@ services:
     envVars:
       - key: NODE_ENV
         value: production
-      - key: DB_PATH
-        value: /var/data/ideas.db
-    disk:
-      name: ideas-db
-      mountPath: /var/data
-      sizeGB: 1
+      - key: DATABASE_URL
+        fromDatabase:
+          name: ideas-db
+          property: connectionString
+
+databases:
+  - name: ideas-db
+    plan: free
