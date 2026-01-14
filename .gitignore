@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Local database
+backend/ideas.db
+backend/ideas.db-shm
+backend/ideas.db-wal

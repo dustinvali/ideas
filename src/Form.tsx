@@ -1,27 +1,27 @@
 import { useState } from "react"
 import type { FormEvent } from 'react'
-import type { Idea } from "./models/types" 
 
-export default function Form({ ideas, setIdeas }) {
+interface FormProps {
+    onAdd: (ideaText: string) => void | Promise<void>
+}
+
+export default function Form({ onAdd }: FormProps) {
     const [text, setText] = useState('')
-
 
     function updateList(e: FormEvent<HTMLFormElement>) {
         e.preventDefault()
 
         if (text.length === 0) {
             return
-        } 
-        const trimmed = text.trim()
-        const greatestId = ideas.length ? Math.max(...ideas.map(i => i.id)) : 0
-        const newIdea: Idea = { 
-            ideaText: trimmed, 
-            id: greatestId + 1, 
-            date: new Date(), 
-            isEdit: false}
-        
+        }
 
-        setIdeas((oldIdeas) => [...oldIdeas, newIdea])
+        const trimmed = text.trim()
+
+        if (trimmed.length === 0) {
+            return
+        }
+
+        onAdd(trimmed)
         setText("")
     }
 

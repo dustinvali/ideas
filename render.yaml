@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: personal-twitter
+    env: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npx tsx backend/index.ts
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DB_PATH
+        value: /var/data/ideas.db
+    disk:
+      name: ideas-db
+      mountPath: /var/data
+      sizeGB: 1
